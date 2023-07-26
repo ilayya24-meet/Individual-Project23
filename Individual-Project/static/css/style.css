@@ -1,0 +1,12 @@
+.titlecard {
+	text-align: center;
+}
+.homepage {
+  background-image: url("/static/css/i.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mainpage {
+  background-image: url("/static/css/i.png");
+  background-repeat: no-repeat;
+}
