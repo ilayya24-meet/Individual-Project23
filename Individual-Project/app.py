@@ -51,8 +51,9 @@ def signup():
 
             return redirect(url_for('signin'))
 
-        except:
-           error = "Authentication failed"
+        except Exception as e:
+            print("SIGN UP ERRORRRRRR", e)
+            error = "Authentication failed"
     return render_template("signup.html")
 
 
