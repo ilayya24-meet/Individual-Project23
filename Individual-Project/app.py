@@ -46,7 +46,7 @@ def signup():
         try:
             login_session['user'] = auth.create_user_with_email_and_password(email, password)
             UID = login_session['user']['localId']
-            user = {'email': email, 'password': password, 'firstname': firstname, 'lastname': lastname, 'username': username}
+            user = {'email': email, 'firstname': firstname, 'lastname': lastname, 'username': username, 'num_lebrons': 0}
             db.child("Users").child(UID).set(user)
 
             return redirect(url_for('signin'))
@@ -74,18 +74,55 @@ def signin():
    return render_template("signin.html")
 
 
+
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
-
     return render_template("home.html")
 
-@app.route('/mainpage', methods=['GET', 'POST'])
+@app.route('/mainpage', methods=['GET', 'POST'],)
 def lepage():
+     lebrons={
+
+     }
      if 'user' in login_session and login_session['user'] is not None:
-        return render_template("lepage.html")
+        
+        # return render_template("lepage.html")
+        try:
+            UID = login_session['user']['localId']
+            
+            
+            lebrons = db.child("Users").child(UID).get().val()['num_lebrons']
+            if request.method=='GET':
+
+                return render_template("lepage.html", lebrons=lebrons)
+            else:
+                db.child("Users").child(UID).update({'num_lebrons': lebrons + 1})
+                return render_template("lepage.html", lebrons=(lebrons + 1))
+        except:
+            error = "upload failed"
      else:
         return redirect(url_for('home'))
     
+
+
+
+@app.route('/mainpage', methods=['GET', 'POST'])
+def addlebron():
+    if request.method == 'POST':
+        try:
+           
+
+            db.child("LeBrons").push(lebron)
+        except:
+            error = "Authentication failed"
+
+
+
+
+    return render_template('lepage')
 
 
 

@@ -2,11 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LeGoodStuff</title>
+    <title>lepage</title>
     <link rel="stylesheet" href='/static/css/style.css'>
 
 </head>
 <body class='mainpage'>
+    <form method="post" action="/mainpage">
     <h1 class='titlecard'> Add a LeBron </h1>
+    <input type="submit" value='Add'>
+    {% for i in range(lebrons) %}
+    <img src='/static/css/i.png'>
+    {%endfor%}
+    </div>
+    
+    </form>
 </body>
 </html>
